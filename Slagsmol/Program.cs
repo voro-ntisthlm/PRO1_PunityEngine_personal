@@ -1,4 +1,5 @@
 ﻿using System;
+using Raylib_cs;
 
 namespace Slagsmol
 {
@@ -6,7 +7,10 @@ namespace Slagsmol
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ScreenHandler screenHandler = new ScreenHandler("Slagsmol", 1280, 720);
+    
+            
+           
         }
     }
 }
