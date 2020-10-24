@@ -16,16 +16,17 @@ namespace PunityEngine
 
         //This function will look at the current configuration of the window, and save it in the SCREEN.cfg file.
         //Will return a true if its successfully saved otherwise returns false.
-        public bool SaveConfiguration(){
+        public bool SaveCurrentConfiguration(){
             try
             {
-                if (!File.Exists(Program.CONFIG_SCREEN))
-                {
-                    Console.WriteLine("NO FILE DETECTED!");
-                }
-                
-                
+                //This will get the data needed.
+                string[] savedConfig = {
+                    "WIDTH:" + Raylib.GetScreenWidth(), 
+                    "HEIGHT:" + Raylib.GetScreenHeight(), 
+                    "FULLSCREEN:" + Raylib.IsWindowFullscreen()
+                };
 
+                File.WriteAllLines(Program.CONFIG_SCREEN, savedConfig);
                 return true;   
             }
             catch (System.Exception)

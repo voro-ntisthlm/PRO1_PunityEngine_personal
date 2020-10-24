@@ -13,7 +13,7 @@ namespace PunityEngine
         {
             ScreenHandler screenHandler = new ScreenHandler("PunityEngine", 1280, 720);
     
-            screenHandler.SaveConfiguration();
+            screenHandler.SaveCurrentConfiguration();
 
             Texture2D logo = Raylib.LoadTextureFromImage(Raylib.LoadImage("EngineAssets/icon.png"));
 
@@ -21,7 +21,8 @@ namespace PunityEngine
             {
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.BLACK);
-                Raylib.DrawTexture(logo, Raylib.GetScreenWidth()/2-90, Raylib.GetScreenHeight()/2-80, Color.WHITE);           
+                Raylib.DrawTexture(logo, Raylib.GetScreenWidth()/2-90, Raylib.GetScreenHeight()/2-160, Color.WHITE);
+                Raylib.DrawText("Punity Engine", Raylib.GetScreenWidth()/2-110, Raylib.GetScreenHeight()/2+10, 30, Color.WHITE);         
                 Raylib.EndDrawing();
             }
            
