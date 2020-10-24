@@ -1,7 +1,7 @@
 using System;
 using Raylib_cs;
 
-namespace Slagsmol
+namespace PunityEngine
 {
     class Entity
     {
