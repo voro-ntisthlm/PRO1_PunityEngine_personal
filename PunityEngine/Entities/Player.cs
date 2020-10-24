@@ -5,9 +5,7 @@ namespace PunityEngine
 {
     class Player : Entity
     {
-        Player(){
-            
-        }
+        
 
     }
 }
