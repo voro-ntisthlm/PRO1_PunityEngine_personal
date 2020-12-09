@@ -10,22 +10,27 @@ namespace PunityEngine
         public int screenHeight = 720;
         public int screenWidth = 1280;
         public bool screenFullscreen = false;
+        int targetFPS = 60;
+        //Image _logo = Raylib.LoadImage("EngineAssets/icon.png");
+        //public Texture2D logo; //= Raylib.LoadTextureFromImage(Raylib.LoadImage("EngineAssets/icon.png"));
+        
 
         //You can ignore the config file and hard code the screen resolution and title.
         public ScreenHandler(string _title, int _windowWidth, int _windowHeight, string _icon){
 
             Image icon = Raylib.LoadImage(_icon);
-
+            
             Raylib.InitWindow(_windowWidth, _windowHeight, _title);
             Raylib.SetWindowIcon(icon);
-        }
+            
+            }
 
         //This will allow you to load the screen configuration from a file.
         public ScreenHandler(string _title ,string CONFIG_SCREEN, string _icon){
 
             //Load the window title.
             Image icon = Raylib.LoadImage(_icon);
-
+            
             //This will attempt to load the screen configuration from the screen.cfg file
             try
             {
@@ -48,6 +53,10 @@ namespace PunityEngine
                         case "FULLSCREEN":
                             screenFullscreen = Convert.ToBoolean(line[1]);
                             break;
+                        case "TARGETFPS":
+                            int.TryParse(line[1], out targetFPS);
+                            Raylib.SetTargetFPS(targetFPS);
+                            break;
                         default:
                         break;
                     }
@@ -69,6 +78,7 @@ namespace PunityEngine
             Raylib.SetWindowIcon(icon);
         }
 
+
         //This function will look at the current configuration of the window, and save it in the SCREEN.cfg file.
         //Will return a true if its successfully saved otherwise returns false.
         public bool SaveCurrentConfiguration(){
@@ -78,7 +88,8 @@ namespace PunityEngine
                 string[] savedConfig = {
                     "WIDTH:" + Raylib.GetScreenWidth(), 
                     "HEIGHT:" + Raylib.GetScreenHeight(), 
-                    "FULLSCREEN:" + Raylib.IsWindowFullscreen()
+                    "FULLSCREEN:" + Raylib.IsWindowFullscreen(),
+                    "TARGETFPS:" + targetFPS
                 };
 
                 File.WriteAllLines(Program.CONFIG_SCREEN, savedConfig);
@@ -88,6 +99,15 @@ namespace PunityEngine
             {
                 return false;
             }
+        }
+
+        //Can be called when the game needs to draw a engine splash screen
+        public void DisplaySplashScreen(){
+            
+            //Causes memory leak, as it requires the texture to be reassigned every frame for some reason....
+            //Raylib.DrawTexture(logo, Raylib.GetScreenWidth()/2-logo.width/2, Raylib.GetScreenHeight()/2-logo.height/2, Color.WHITE);
+            Raylib.DrawText("Punity Engine", Raylib.GetScreenWidth()/2-Raylib.MeasureText("Punity Engine", 30)/2, Raylib.GetScreenHeight()/2, 30, Color.WHITE);    
+            Raylib.DrawFPS(0, 50);  
         }
     }
 }

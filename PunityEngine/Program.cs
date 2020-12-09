@@ -11,23 +11,30 @@ namespace PunityEngine
         #endregion
         static void Main(string[] args)
         {
-            //ScreenHandler screenHandler = new ScreenHandler("PunityEngine", 1280, 720);
+            //Initilizes the screenHandler
             ScreenHandler screenHandler = new ScreenHandler("Punity", CONFIG_SCREEN, "EngineAssets/icon.png");
-
-            Texture2D logo = Raylib.LoadTextureFromImage(Raylib.LoadImage("EngineAssets/icon.png"));
-
-            Raylib.SetTargetFPS(60);
             
+            
+            //This will initialise the game
+            GameHandler game = new GameHandler();
+
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.BLACK);
-                Raylib.DrawTexture(logo, Raylib.GetScreenWidth()/2-90, Raylib.GetScreenHeight()/2-160, Color.WHITE);
-                Raylib.DrawText("Punity Engine", Raylib.GetScreenWidth()/2-110, Raylib.GetScreenHeight()/2+10, 30, Color.WHITE);    
-                Raylib.DrawFPS(0, 50);     
-                Raylib.EndDrawing();
-            }
+                
+                if(Raylib.IsKeyDown(KeyboardKey.KEY_F)){
+                    screenHandler.DisplaySplashScreen();
+                }else{
+                    game.Update();
+                }
 
+                Raylib.ClearBackground(Color.BLACK);
+                Raylib.EndDrawing();
+
+            }
+            
+            Raylib.CloseWindow();
+            //When the game closes, it saves the config.
             screenHandler.SaveCurrentConfiguration();
            
         }
