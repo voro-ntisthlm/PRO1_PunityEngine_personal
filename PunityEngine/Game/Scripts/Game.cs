@@ -31,6 +31,7 @@ namespace PunityEngine
             {
                 case stage.MainMenu:
                     mainMenu.Draw();
+                    mainMenu.Update();
                 break;
                 case stage.Settings:
                 break;
