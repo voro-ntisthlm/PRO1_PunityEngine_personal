@@ -31,6 +31,7 @@ namespace PunityEngine
             
         }
 
+
         //The update function is the logical loop, here all logic goes.
         public void Update(){
             if (newGame.IsClicked())
