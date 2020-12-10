@@ -8,7 +8,7 @@ namespace PunityEngine
     public class MainMenu
     {    
         #region UI elements
-        Button newGame   = new Button(new Vector2(100, Raylib.GetScreenHeight()/10 + 70), new Vector2(250, 40), Color.WHITE, Color.BLACK, "New Game");
+        Button newGame   = new Button(new Vector2(100, Raylib.GetScreenHeight()/10 +  70), new Vector2(250, 40), Color.WHITE, Color.BLACK, "New Game");
         Button saves     = new Button(new Vector2(100, Raylib.GetScreenHeight()/10 + 120), new Vector2(250, 40), Color.WHITE, Color.BLACK, "Saves");
         Button coop      = new Button(new Vector2(100, Raylib.GetScreenHeight()/10 + 170), new Vector2(250, 40), Color.WHITE, Color.BLACK, "CO-OP");
         Button lvleditor = new Button(new Vector2(100, Raylib.GetScreenHeight()/10 + 220), new Vector2(250, 40), Color.WHITE, Color.BLACK, "Level editor");
@@ -36,6 +36,12 @@ namespace PunityEngine
             if (newGame.IsClicked())
             {
                 Console.WriteLine("Update loop");
+            }
+            
+            if (exit.IsClicked())
+            {
+                Raylib.CloseWindow();
+                Environment.Exit(1);
             }
         }
     }

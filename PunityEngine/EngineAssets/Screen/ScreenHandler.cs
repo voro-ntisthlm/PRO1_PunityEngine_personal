@@ -13,7 +13,7 @@ namespace PunityEngine
         int targetFPS = 60;
         //Image _logo = Raylib.LoadImage("EngineAssets/icon.png");
         //public Texture2D logo; //= Raylib.LoadTextureFromImage(Raylib.LoadImage("EngineAssets/icon.png"));
-        
+        Texture2D LogoTexture;
 
         //You can ignore the config file and hard code the screen resolution and title.
         public ScreenHandler(string _title, int _windowWidth, int _windowHeight, string _icon){
@@ -23,6 +23,8 @@ namespace PunityEngine
             Raylib.InitWindow(_windowWidth, _windowHeight, _title);
             Raylib.SetWindowIcon(icon);
             
+            LogoTexture = Raylib.LoadTexture(@"EngineAssets/icon.png");
+
             }
 
         //This will allow you to load the screen configuration from a file.
@@ -76,6 +78,7 @@ namespace PunityEngine
             }
 
             Raylib.SetWindowIcon(icon);
+            LogoTexture = Raylib.LoadTexture(@"EngineAssets/icon.png");
         }
 
 
@@ -106,6 +109,7 @@ namespace PunityEngine
             
             //Causes memory leak, as it requires the texture to be reassigned every frame for some reason....
             //Raylib.DrawTexture(logo, Raylib.GetScreenWidth()/2-logo.width/2, Raylib.GetScreenHeight()/2-logo.height/2, Color.WHITE);
+            Raylib.DrawTexture(LogoTexture, 0,0, Color.WHITE);
             Raylib.DrawText("Punity Engine", Raylib.GetScreenWidth()/2-Raylib.MeasureText("Punity Engine", 30)/2, Raylib.GetScreenHeight()/2, 30, Color.WHITE);    
             Raylib.DrawFPS(0, 50);  
         }
