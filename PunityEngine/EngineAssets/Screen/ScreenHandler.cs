@@ -22,7 +22,7 @@ namespace PunityEngine
             
             Raylib.InitWindow(_windowWidth, _windowHeight, _title);
             Raylib.SetWindowIcon(icon);
-            
+
             LogoTexture = Raylib.LoadTexture(@"EngineAssets/icon.png");
 
             }
@@ -78,6 +78,7 @@ namespace PunityEngine
             }
 
             Raylib.SetWindowIcon(icon);
+
             LogoTexture = Raylib.LoadTexture(@"EngineAssets/icon.png");
         }
 

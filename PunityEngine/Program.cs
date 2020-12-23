@@ -21,14 +21,8 @@ namespace PunityEngine
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
-                
-                if(Raylib.IsKeyDown(KeyboardKey.KEY_F)){
-                    screenHandler.DisplaySplashScreen();
-                }else{
-                    game.Update();
-                }
-
                 Raylib.ClearBackground(Color.BLACK);
+                game.Update();
                 Raylib.EndDrawing();
 
             }
