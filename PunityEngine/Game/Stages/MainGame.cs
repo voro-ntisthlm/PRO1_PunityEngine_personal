@@ -6,7 +6,7 @@ using PunityEngine.Game.Entities;
 
 namespace PunityEngine.Game.Stages
 {
-    public class MainGame : IStage
+    public class MainGame
     {
         Player player = new Player();       
 
@@ -15,7 +15,7 @@ namespace PunityEngine.Game.Stages
         }
 
         public void Update(){
-
+            player.Update();
         }
     }
 }

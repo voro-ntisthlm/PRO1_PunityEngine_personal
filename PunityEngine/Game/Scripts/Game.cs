@@ -14,11 +14,11 @@ namespace PunityEngine
 
         }
 
-        public stage currentStage = stage.MainMenu;
+        public stage CurrentStage = stage.MainMenu;
         
         #region Stages
-        public MainMenu mainMenu = new MainMenu();
-        public MainGame game = new MainGame();
+        public MainMenu MainMenu = new MainMenu();
+        public MainGame Game = new MainGame();
         #endregion
 
 
@@ -30,17 +30,17 @@ namespace PunityEngine
 
             //This will check what "stage" you are in, so it can properly handle the stage.
             //Stage handler:
-            switch (currentStage)
+            switch (CurrentStage)
             {
                 case stage.MainMenu:
-                    mainMenu.Draw();
-                    mainMenu.Update();
+                    MainMenu.Draw();
+                    MainMenu.Update();
 
                     //This switch will check if a button that changes the stage is pressed.
-                    switch (mainMenu.buttonPressed)
+                    switch (MainMenu.buttonPressed)
                     {
-                        case MainMenu.buttonAlternatives.newGame:
-                            currentStage = stage.Game;
+                        case MainMenu.buttonAlternatives.NewGame:
+                            CurrentStage = stage.Game;
                         break;
                     }
                 break;
@@ -50,8 +50,8 @@ namespace PunityEngine
                 case stage.NewWorld:
                 break;
                 case stage.Game:
-                    game.Draw();
-                    game.Update();
+                    Game.Draw();
+                    Game.Update();
                 break;
                 default:
                 break;
