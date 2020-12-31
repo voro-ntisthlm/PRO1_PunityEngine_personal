@@ -1,3 +1,9 @@
+/////////////////////////////////////////////////////////////
+//                   FILE INFO                             //
+//  This is the entry point for the game, simmilar to      //
+//  Program.cs in any other cs project.                    //
+/////////////////////////////////////////////////////////////
+
 using System;
 using Raylib_cs;
 using PunityEngine.Game.Stages;
@@ -6,7 +12,7 @@ namespace PunityEngine
 {
     class GameHandler
     {
-        public enum stage{
+        public enum Stage{
             MainMenu,
             Settings,
             NewWorld,
@@ -14,48 +20,54 @@ namespace PunityEngine
 
         }
 
-        public stage CurrentStage = stage.MainMenu;
         
         #region Stages
         public MainMenu MainMenu = new MainMenu();
         public MainGame Game = new MainGame();
+        public Stage CurrentStage = Stage.MainMenu;
         #endregion
 
-
-        public GameHandler(){
-        }
-
-        //This function is run every frame.
-        public void Update(){
-
-            //This will check what "stage" you are in, so it can properly handle the stage.
-            //Stage handler:
+        public void Draw(){
+            // Will call the draw and update function for each Stage, depening on wich is the
+            // current one.
             switch (CurrentStage)
             {
-                case stage.MainMenu:
+                case Stage.MainMenu:
                     MainMenu.Draw();
-                    MainMenu.Update();
-
-                    //This switch will check if a button that changes the stage is pressed.
-                    switch (MainMenu.buttonPressed)
-                    {
-                        case MainMenu.buttonAlternatives.NewGame:
-                            CurrentStage = stage.Game;
-                        break;
-                    }
+                    MainMenu.Update();  
                 break;
-
-                case stage.Settings:
-                break;
-                case stage.NewWorld:
-                break;
-                case stage.Game:
+                
+                case Stage.Game:
                     Game.Draw();
                     Game.Update();
                 break;
+
+                case Stage.Settings:
+                break;
+
+                case Stage.NewWorld:
+                break;
+
                 default:
                 break;
-            }       
+            }
+        }
+
+        // Any code that should be run each frame shall go in here,
+        // if that code needs to be run no matter what stage it is in.
+        public void Update(){
+            StageSwitcher();
+        }
+
+
+        public void StageSwitcher(){
+            // This switch will check if a button that changes the Stage is pressed.
+            switch (MainMenu.buttonPressed)
+            {
+                case MainMenu.buttonAlternatives.NewGame:
+                CurrentStage = Stage.Game;
+                break;
+            }
         }
     }
 }

@@ -21,8 +21,13 @@ namespace PunityEngine
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.BLACK);
+                // Default color if it is not overidden by a background in any stage.
+                Raylib.ClearBackground(Color.BLANK);
+                
+                // This will actually draw the game.
+                game.Draw();
                 game.Update();
+                
                 Raylib.EndDrawing();
 
             }
