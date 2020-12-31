@@ -12,7 +12,7 @@ namespace PunityEngine
         public bool ScreenFullscreen = false;
         int targetFPS = 60;
 
-        Texture2D screenFullscreen;
+        Texture2D logoTexture;
 
         // You can ignore the config file and hard code the screen resolution and title.
         public ScreenHandler(string _title, int _windowWidth, int _windowHeight, string _icon){
@@ -22,7 +22,7 @@ namespace PunityEngine
             Raylib.InitWindow(_windowWidth, _windowHeight, _title);
             Raylib.SetWindowIcon(icon);
 
-            screenFullscreen = Raylib.LoadTexture(@"EngineAssets/icon.png");
+            logoTexture = Raylib.LoadTexture(@"EngineAssets/icon.png");
 
             }
 
@@ -38,7 +38,8 @@ namespace PunityEngine
                 string[] configLines = System.IO.File.ReadAllLines(CONFIG_SCREEN);
 
 
-                // This will loop thorugh the file and depending on the "variable" it will assign the value to the corrosponding variable
+                // This will loop thorugh the file and depending on the "variable" 
+                // it will assign the value to the corrosponding variable
                 foreach (var config in configLines)
                 {
                     string[] line = config.Split(":");
@@ -78,7 +79,7 @@ namespace PunityEngine
 
             Raylib.SetWindowIcon(icon);
 
-            screenFullscreen = Raylib.LoadTexture(@"EngineAssets/icon.png");
+            logoTexture = Raylib.LoadTexture(@"EngineAssets/icon.png");
         }
 
 
