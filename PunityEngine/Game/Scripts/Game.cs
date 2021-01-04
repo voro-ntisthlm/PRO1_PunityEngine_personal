@@ -12,7 +12,7 @@ namespace PunityEngine
 {
     class GameHandler
     {
-        public enum Stage{
+        public enum Stages{
             MainMenu,
             Settings,
             NewWorld,
@@ -24,7 +24,7 @@ namespace PunityEngine
         #region Stages
         public MainMenu MainMenu = new MainMenu();
         public MainGame Game = new MainGame();
-        public Stage CurrentStage = Stage.MainMenu;
+        public Stages CurrentStage = Stages.MainMenu;
         #endregion
 
         public void Draw(){
@@ -32,20 +32,20 @@ namespace PunityEngine
             // current one.
             switch (CurrentStage)
             {
-                case Stage.MainMenu:
+                case Stages.MainMenu:
                     MainMenu.Draw();
                     MainMenu.Update();  
                 break;
                 
-                case Stage.Game:
+                case Stages.Game:
                     Game.Draw();
                     Game.Update();
                 break;
 
-                case Stage.Settings:
+                case Stages.Settings:
                 break;
 
-                case Stage.NewWorld:
+                case Stages.NewWorld:
                 break;
 
                 default:
@@ -57,6 +57,12 @@ namespace PunityEngine
         // if that code needs to be run no matter what stage it is in.
         public void Update(){
             StageSwitcher();
+
+            // This will act as the pause menu
+            if (Raylib.IsKeyPressed(key: KeyboardKey.KEY_ESCAPE) && CurrentStage == Stages.Game)
+            {
+                CurrentStage = Stages.MainMenu;
+            }
         }
 
 
@@ -65,7 +71,8 @@ namespace PunityEngine
             switch (MainMenu.buttonPressed)
             {
                 case MainMenu.buttonAlternatives.NewGame:
-                CurrentStage = Stage.Game;
+                    CurrentStage = Stages.Game;
+                    MainMenu.buttonPressed = MainMenu.buttonAlternatives.Empty; // This will reset the button, preventing a bug.
                 break;
             }
         }

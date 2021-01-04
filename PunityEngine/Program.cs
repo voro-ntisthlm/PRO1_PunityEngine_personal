@@ -14,9 +14,12 @@ namespace PunityEngine
             //Initilizes the screenHandler
             ScreenHandler screenHandler = new ScreenHandler("Punity", CONFIG_SCREEN, "EngineAssets/icon.png");
             
-            
             //This will initialise the game
             GameHandler game = new GameHandler();
+
+            // To allow the esc button to be used as a pause button,
+            // F12 have been set as the exit key.
+            Raylib.SetExitKey(key: KeyboardKey.KEY_F12);
 
             while (!Raylib.WindowShouldClose())
             {
@@ -33,6 +36,7 @@ namespace PunityEngine
             }
             
             Raylib.CloseWindow();
+
             //When the game closes, it saves the config.
             screenHandler.SaveCurrentConfiguration();
            

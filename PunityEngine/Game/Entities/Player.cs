@@ -6,9 +6,8 @@ namespace PunityEngine.Game.Entities
 {
     public class Player : Entity
     {
-        bool isMultiplayer = false; //This will be replaced when the networking goese into effect.
-
-        //public new Vector2 Position = new Vector2();
+        // This will be replaced when the networking goese into effect.
+        bool isMultiplayer = false;
 
         public Player(){
             texture = Raylib.LoadTexture("EngineAssets/icon.png");
@@ -18,7 +17,6 @@ namespace PunityEngine.Game.Entities
         public override void Draw()
         {
             Raylib.DrawTextureV(texture, Position, Color.WHITE);
-            base.Draw();
         }
 
         public override void Update(){
@@ -26,8 +24,13 @@ namespace PunityEngine.Game.Entities
             {
                 UserInput();
             }
+            else
+            {
+                // Parse move instructions from the multiplayer component here...
+            }
         }
 
+        // TODO: Create a better user input system.
         void UserInput(){
             if (Raylib.IsKeyDown(key: KeyboardKey.KEY_W))
             {
