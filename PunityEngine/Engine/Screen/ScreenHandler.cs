@@ -7,12 +7,12 @@ namespace PunityEngine
     static class ScreenHandler
     {
         // Screen variables, will be set in pixels
-        static public int    ScreenHeight     = 720;
-        static public int    ScreenWidth      = 1280;
-        static public bool   ScreenFullscreen = false;
-        static public int    TargetFPS        = 60;
-        static public string Title            = "Punity Game";
-        static public string Icon             = "";
+        static public int    screenHeight     = 720;
+        static public int    screenWidth      = 1280;
+        static public bool   screenFullscreen = false;
+        static public int    targetFPS        = 60;
+        static public string title            = "Punity Game";
+        static public string iconPath         = "";
 
         // This will allow you to load the screen configuration from a file.
         static public void Init(string CONFIG_SCREEN){
@@ -30,23 +30,23 @@ namespace PunityEngine
                     switch (line[0])
                     {
                         case "WIDTH":
-                            int.TryParse(line[1], out ScreenWidth);
+                            int.TryParse(line[1], out screenWidth);
                             break;
                         case "HEIGHT":
-                            int.TryParse(line[1], out ScreenHeight);
+                            int.TryParse(line[1], out screenHeight);
                             break;
                         case "FULLSCREEN":
-                            ScreenFullscreen = Convert.ToBoolean(line[1]);
+                            screenFullscreen = Convert.ToBoolean(line[1]);
                             break;
                         case "TARGETFPS":
-                            int.TryParse(line[1], out TargetFPS);
-                            Raylib.SetTargetFPS(TargetFPS);
+                            int.TryParse(line[1], out targetFPS);
+                            Raylib.SetTargetFPS(targetFPS);
                             break;
                         case "ICON":
-                            Icon = "./Data/" + line[1];
+                            iconPath = "./Data/" + line[1];
                             break;
                         case "TITLE":
-                            Title = line[1];
+                            title = line[1];
                             break;
                         default:
                         break;
@@ -59,14 +59,14 @@ namespace PunityEngine
             }
 
             // Starts the screen
-            Raylib.InitWindow(ScreenWidth, ScreenHeight, Title);
+            Raylib.InitWindow(screenWidth, screenHeight, title);
 
-            if(ScreenFullscreen){
+            if(screenFullscreen){
                 Raylib.ToggleFullscreen();
             }
 
             // Load the window icon and apply it.
-            Image icon = Raylib.LoadImage(Icon);
+            Image icon = Raylib.LoadImage(iconPath);
             Raylib.SetWindowIcon(icon);
         }
 
@@ -81,7 +81,7 @@ namespace PunityEngine
                     "WIDTH:" + Raylib.GetScreenWidth(), 
                     "HEIGHT:" + Raylib.GetScreenHeight(), 
                     "FULLSCREEN:" + Raylib.IsWindowFullscreen(),
-                    "TARGETFPS:" + TargetFPS
+                    "TARGETFPS:" + targetFPS
                 };
 
                 // Write the data to the cfg file.
