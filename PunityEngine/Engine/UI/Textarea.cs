@@ -1,6 +1,6 @@
 using System;
 
-namespace PunityEngine.EngineAssets.UI
+namespace PunityEngine.Engine.UI
 {
     public class Textarea
     {

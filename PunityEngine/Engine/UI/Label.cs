@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 using Raylib_cs;
 
-namespace PunityEngine.EngineAssets.UI
+namespace PunityEngine.Engine.UI
 {
     public class Label : UI
     {
@@ -20,7 +20,7 @@ namespace PunityEngine.EngineAssets.UI
             fontSize    = _fontSize;
             colorTint   = _colorTint;
 
-            //Assign the scale
+            // Assign the scale
             position *= ScaleFactor;
             fontSize *= ScaleFactor;
         }

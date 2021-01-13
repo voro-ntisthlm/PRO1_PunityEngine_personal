@@ -1,7 +1,7 @@
 using System;
 using Raylib_cs;
 
-namespace PunityEngine.EngineAssets.UI
+namespace PunityEngine.Engine.UI
 {
     public class UI
     {
@@ -10,7 +10,7 @@ namespace PunityEngine.EngineAssets.UI
         public float ScaleFactor {get; set;}
 
         public void ScaleToScreen(){
-            //The original scale is set to 720p so the screen height / 720
+            // The original scale is set to 720p so the screen height / 720
             ScaleFactor = Raylib.GetScreenHeight() / 720f;
         }
     }

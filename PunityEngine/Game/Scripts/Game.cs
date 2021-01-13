@@ -10,36 +10,39 @@ using PunityEngine.Game.Stages;
 
 namespace PunityEngine
 {
-    class GameHandler
+    static class GameHandler
     {
         public enum Stages{
             MainMenu,
+            CoopMenu,
             Settings,
             NewWorld,
             Game,
 
         }
 
-        
         #region Stages
-        public MainMenu MainMenu = new MainMenu();
-        public MainGame Game = new MainGame();
-        public Stages CurrentStage = Stages.MainMenu;
+        static public MainMenu MainMenu = new MainMenu();
+        static public CoopMenu coopMenu  = new CoopMenu();
+        static public MainGame Game = new MainGame();
+        static public Stages CurrentStage = Stages.MainMenu;
         #endregion
 
-        public void Draw(){
-            // Will call the draw and update function for each Stage, depening on wich is the
+        static public void Draw(){
+            // Will call the draw and function for each Stage, depening on wich is the
             // current one.
             switch (CurrentStage)
             {
                 case Stages.MainMenu:
-                    MainMenu.Draw();
-                    MainMenu.Update();  
+                    MainMenu.Draw();  
+                break;
+
+                case Stages.CoopMenu:
+                    coopMenu.Draw();
                 break;
                 
                 case Stages.Game:
                     Game.Draw();
-                    Game.Update();
                 break;
 
                 case Stages.Settings:
@@ -55,7 +58,32 @@ namespace PunityEngine
 
         // Any code that should be run each frame shall go in here,
         // if that code needs to be run no matter what stage it is in.
-        public void Update(){
+        static public void Update(){
+
+            switch (CurrentStage)
+            {
+                case Stages.MainMenu:
+                    MainMenu.Update();  
+                break;
+                
+                case Stages.CoopMenu:
+                    coopMenu.Update();
+                break;
+
+                case Stages.Game:
+                    Game.Update();
+                break;
+
+                case Stages.Settings:
+                break;
+
+                case Stages.NewWorld:
+                break;
+
+                default:
+                break;
+            }
+
             StageSwitcher();
 
             // This will act as the pause menu
@@ -66,13 +94,21 @@ namespace PunityEngine
         }
 
 
-        public void StageSwitcher(){
+        static public void StageSwitcher(){
             // This switch will check if a button that changes the Stage is pressed.
             switch (MainMenu.buttonPressed)
             {
                 case MainMenu.buttonAlternatives.NewGame:
                     CurrentStage = Stages.Game;
-                    MainMenu.buttonPressed = MainMenu.buttonAlternatives.Empty; // This will reset the button, preventing a bug.
+
+                    // This will reset the button, preventing a stage switch each frame.
+                    MainMenu.buttonPressed = MainMenu.buttonAlternatives.Empty;
+                break;
+                case MainMenu.buttonAlternatives.Coop:
+                    CurrentStage = Stages.CoopMenu;
+
+                    // This will reset the button, preventing a stage switch each frame.
+                    MainMenu.buttonPressed = MainMenu.buttonAlternatives.Empty;
                 break;
             }
         }

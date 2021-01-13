@@ -10,7 +10,7 @@ namespace PunityEngine.Game.Entities
         bool isMultiplayer = false;
 
         public Player(){
-            texture = Raylib.LoadTexture("EngineAssets/icon.png");
+            texture = Raylib.LoadTexture("Data/icon.png");
             ScaleToScreen(); //Inherited from the Entity class
         }
 

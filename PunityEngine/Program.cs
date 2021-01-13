@@ -1,5 +1,6 @@
 ﻿using System;
 using Raylib_cs;
+using System.Timers;
 
 namespace PunityEngine
 {
@@ -9,13 +10,15 @@ namespace PunityEngine
         public static string CONFIG_SCREEN = "./Data/Configuration/Screen.cfg";
 
         #endregion
+
+        // This timer will be used to run the update function at the tick speed.
+        static float tickTimerMaxValue = 0.025f;
+        static float tickTimer = tickTimerMaxValue;
+
         static void Main(string[] args)
         {
-            //Initilizes the screenHandler
-            ScreenHandler screenHandler = new ScreenHandler("Punity", CONFIG_SCREEN, "EngineAssets/icon.png");
-            
-            //This will initialise the game
-            GameHandler game = new GameHandler();
+            // Initilizes the screenHandler
+            ScreenHandler.Init(CONFIG_SCREEN);
 
             // To allow the esc button to be used as a pause button,
             // F12 have been set as the exit key.
@@ -27,18 +30,31 @@ namespace PunityEngine
                 // Default color if it is not overidden by a background in any stage.
                 Raylib.ClearBackground(Color.BLANK);
                 
-                // This will actually draw the game.
-                game.Draw();
-                game.Update();
-                
-                Raylib.EndDrawing();
+                // GameHandler is a static class.
+                GameHandler.Draw();
+                GameHandler.Update();
 
+                /*
+                // This will run the update function 20 times a second, instead of every single frame.
+                // NOTE: this solution was mainly taken from the C# refrences.
+ 
+                tickTimer -= Raylib.GetFrameTime();
+                if (tickTimer < 0)
+                {
+                    game.Update();
+
+                    // Resets the timer.
+                    tickTimer = tickTimerMaxValue;
+                }
+                */
+
+                Raylib.EndDrawing();
             }
             
             Raylib.CloseWindow();
 
-            //When the game closes, it saves the config.
-            screenHandler.SaveCurrentConfiguration();
+            // When the game closes, it saves the config.
+            // ScreenHandler.SaveCurrentConfiguration();
            
         }
     }

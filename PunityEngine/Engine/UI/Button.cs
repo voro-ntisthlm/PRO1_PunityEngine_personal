@@ -2,16 +2,15 @@ using System;
 using Raylib_cs;
 using System.Numerics;
 
-namespace PunityEngine.EngineAssets.UI
+namespace PunityEngine.Engine.UI
 {
     public class Button : UI
     {
         #region Variables
-        // Public variables are named with a Capital letter.
         public int ID = 0;
-        public Vector2 Position = new Vector2(0,0);
-        public Vector2 Size = new Vector2(0,0);
-        public Rectangle BtnBounds = new Rectangle();
+        public Vector2 position = new Vector2(0,0);
+        public Vector2 size = new Vector2(0,0);
+        public Rectangle btnBounds = new Rectangle();
 
         Texture2D texture;
         Color backgroundColor;
@@ -27,8 +26,8 @@ namespace PunityEngine.EngineAssets.UI
         public Button(int _ID, Vector2 _pos, Vector2 _Size, Color _backgroundColor,Color _textColor, float _fontSize, string _text)
         {
             ID              = _ID; 
-            Position        = _pos;
-            Size            = _Size;
+            position        = _pos;
+            size            = _Size;
             backgroundColor = _backgroundColor;
             textColor       = _textColor;
             text            = _text;
@@ -37,22 +36,20 @@ namespace PunityEngine.EngineAssets.UI
             ScaleToScreen();
 
             // Multiply the value by the scalFactor
-            Position.X *= ScaleFactor;
-            Position.Y *= ScaleFactor;
-            Size.X     *= ScaleFactor;
-            Size.Y     *= ScaleFactor;
+            position   *= ScaleFactor;
+            size       *= ScaleFactor;
 
             fontSize   *= ScaleFactor;
 
-            BtnBounds = new Rectangle(Position.X, Position.Y, Size.X, Size.Y);
+            btnBounds = new Rectangle(position.X, position.Y, size.X, size.Y);
         }
 
         // This constructor defines a button with a texture as a background, and plain text.
         public Button(int _ID, Vector2 _pos, Texture2D _texture, Color _textColor, float _fontSize, string _text)
         {
             ID              = _ID; 
-            Position        = _pos;
-            Size            = new Vector2((float)_texture.width, (float)_texture.height);
+            position        = _pos;
+            size            = new Vector2((float)_texture.width, (float)_texture.height);
             textColor       = _textColor;
             text            = _text;
             texture         = _texture;
@@ -61,33 +58,29 @@ namespace PunityEngine.EngineAssets.UI
             ScaleToScreen();
     
             // Multiply the value by the scalFactor
-            Position.X *= ScaleFactor;
-            Position.Y *= ScaleFactor;
-            Size.X     *= ScaleFactor;
-            Size.Y     *= ScaleFactor;
+            position *= ScaleFactor;
+            size     *= ScaleFactor;
             
             fontSize   *= ScaleFactor;
 
-            BtnBounds  = new Rectangle(Position.X, Position.Y, Size.X, Size.Y);
+            btnBounds  = new Rectangle(position.X, position.Y, size.X, size.Y);
         }
 
         // This constructor defines a button with only a texture.
         public Button(int _ID, Vector2 _pos, Texture2D _texture)
         {
             ID              = _ID; 
-            Position        = _pos;
-            Size            = new Vector2((float)_texture.width, (float)_texture.height);
+            position        = _pos;
+            size            = new Vector2((float)_texture.width, (float)_texture.height);
             texture         = _texture;
 
             ScaleToScreen();
 
             // Multiply the value by the scalFactor
-            Position.X *= ScaleFactor;
-            Position.Y *= ScaleFactor;
-            Size.X     *= ScaleFactor;
-            Size.Y     *= ScaleFactor;
+            position *= ScaleFactor;
+            size     *= ScaleFactor;
 
-            BtnBounds       = new Rectangle(Position.X, Position.Y, Size.X, Size.Y);
+            btnBounds       = new Rectangle(position.X, position.Y, size.X, size.Y);
         }
         #endregion
 
@@ -97,18 +90,18 @@ namespace PunityEngine.EngineAssets.UI
             if (texture.height != 0)
             {
                 if (IsHovered()){
-                    Raylib.DrawTextureRec(texture, new Rectangle(0, 0, Size.X, Size.Y) , Position, Color.GRAY);
+                    Raylib.DrawTextureRec(texture, new Rectangle(0, 0, size.X, size.Y) , position, Color.GRAY);
                 }else{
-                    Raylib.DrawTextureRec(texture, new Rectangle(0, 0, Size.X, Size.Y) , Position, Color.WHITE);
+                    Raylib.DrawTextureRec(texture, new Rectangle(0, 0, size.X, size.Y) , position, Color.WHITE);
                 }
             }
             else{
                 // if the user has defined a texuture it will not use this.
                 // Depending on the IsHovered, it will change the backgound.
                 if (IsHovered()){
-                    Raylib.DrawRectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y, Color.GRAY);
+                    Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, Color.GRAY);
                 }else{
-                    Raylib.DrawRectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y, backgroundColor);
+                    Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, backgroundColor);
                 }
             }
             
@@ -122,8 +115,8 @@ namespace PunityEngine.EngineAssets.UI
             */
             Raylib.DrawText(
                 text, 
-                (int)Position.X + ((int)Size.X - Raylib.MeasureText(text, (int)fontSize))/2, 
-                (int)Position.Y + ((int)Size.Y - (int)fontSize)/2, 
+                (int)position.X + ((int)size.X - Raylib.MeasureText(text, (int)fontSize))/2, 
+                (int)position.Y + ((int)size.Y - (int)fontSize)/2, 
                 (int)fontSize, 
                 textColor
             );
@@ -133,7 +126,7 @@ namespace PunityEngine.EngineAssets.UI
         #region Logic
         // This will check if the mouse is within the bounds of the button.
         public bool IsHovered(){
-            return (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), BtnBounds));
+            return (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), btnBounds));
         }
 
         // Using the IsHovered function, it will check the return value of it and also if the left mouse button is pressed.

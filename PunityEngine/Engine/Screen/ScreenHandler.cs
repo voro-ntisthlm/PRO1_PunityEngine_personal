@@ -4,39 +4,22 @@ using Raylib_cs;
 
 namespace PunityEngine
 {
-    class ScreenHandler
+    static class ScreenHandler
     {
         // Screen variables, will be set in pixels
-        public int ScreenHeight = 720;
-        public int ScreenWidth = 1280;
-        public bool ScreenFullscreen = false;
-        int targetFPS = 60;
-
-        Texture2D logoTexture;
-
-        // You can ignore the config file and hard code the screen resolution and title.
-        public ScreenHandler(string _title, int _windowWidth, int _windowHeight, string _icon){
-
-            Image icon = Raylib.LoadImage(_icon);
-            
-            Raylib.InitWindow(_windowWidth, _windowHeight, _title);
-            Raylib.SetWindowIcon(icon);
-
-            logoTexture = Raylib.LoadTexture(@"EngineAssets/icon.png");
-
-            }
+        static public int    ScreenHeight     = 720;
+        static public int    ScreenWidth      = 1280;
+        static public bool   ScreenFullscreen = false;
+        static public int    TargetFPS        = 60;
+        static public string Title            = "Punity Game";
+        static public string Icon             = "";
 
         // This will allow you to load the screen configuration from a file.
-        public ScreenHandler(string _title ,string CONFIG_SCREEN, string _icon){
-
-            // Load the window title.
-            Image icon = Raylib.LoadImage(_icon);
-            
+        static public void Init(string CONFIG_SCREEN){
             // This will attempt to load the screen configuration from the screen.cfg file
             try
             {
                 string[] configLines = System.IO.File.ReadAllLines(CONFIG_SCREEN);
-
 
                 // This will loop thorugh the file and depending on the "variable" 
                 // it will assign the value to the corrosponding variable
@@ -56,8 +39,14 @@ namespace PunityEngine
                             ScreenFullscreen = Convert.ToBoolean(line[1]);
                             break;
                         case "TARGETFPS":
-                            int.TryParse(line[1], out targetFPS);
-                            Raylib.SetTargetFPS(targetFPS);
+                            int.TryParse(line[1], out TargetFPS);
+                            Raylib.SetTargetFPS(TargetFPS);
+                            break;
+                        case "ICON":
+                            Icon = "./Data/" + line[1];
+                            break;
+                        case "TITLE":
+                            Title = line[1];
                             break;
                         default:
                         break;
@@ -69,23 +58,22 @@ namespace PunityEngine
                 Console.WriteLine("ERROR WHEN LOADING SCREEN.CFG");    
             }
 
-
             // Starts the screen
-            Raylib.InitWindow(ScreenWidth, ScreenHeight, _title);
+            Raylib.InitWindow(ScreenWidth, ScreenHeight, Title);
 
             if(ScreenFullscreen){
                 Raylib.ToggleFullscreen();
             }
 
+            // Load the window icon and apply it.
+            Image icon = Raylib.LoadImage(Icon);
             Raylib.SetWindowIcon(icon);
-
-            logoTexture = Raylib.LoadTexture(@"EngineAssets/icon.png");
         }
 
 
         // This function will look at the current configuration of the window, and save it in the SCREEN.cfg file.
         // Will return a true if its successfully saved otherwise returns false.
-        public bool SaveCurrentConfiguration(){
+        static public bool SaveCurrentConfiguration(){
             try
             {
                 // This will get the data needed.
@@ -93,9 +81,10 @@ namespace PunityEngine
                     "WIDTH:" + Raylib.GetScreenWidth(), 
                     "HEIGHT:" + Raylib.GetScreenHeight(), 
                     "FULLSCREEN:" + Raylib.IsWindowFullscreen(),
-                    "TARGETFPS:" + targetFPS
+                    "TARGETFPS:" + TargetFPS
                 };
 
+                // Write the data to the cfg file.
                 File.WriteAllLines(Program.CONFIG_SCREEN, savedConfig);
                 return true;   
             }
