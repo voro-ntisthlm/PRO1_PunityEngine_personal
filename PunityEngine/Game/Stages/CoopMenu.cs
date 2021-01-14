@@ -4,10 +4,11 @@ using Raylib_cs;
 using PunityEngine.Engine.UI;
 using PunityEngine;
 using PunityEngine.Engine.Network;
+using PunityEngine.Engine.Stage;
 
 namespace PunityEngine.Game.Stages
 {
-    public class CoopMenu
+    public class CoopMenu : Stage, IStage
     {    
         #region UI elements
         
@@ -27,23 +28,8 @@ namespace PunityEngine.Game.Stages
         #endregion
 
 
-        public enum buttonAlternatives{
-            Empty,
-            Join,
-            Host,
-        }
-
-
-        public buttonAlternatives buttonPressed = buttonAlternatives.Empty;
-
-
-        // The main loop, every drawn element is called here.
-        public void Draw(){
-            DrawUI();
-        }
-
         // Put all UI elements in here.
-        public void DrawUI(){
+        public override void DrawUI(){
             
             // Loop through all buttons, as its an array of buttons,
             // all of 'em has a draw function. 
@@ -60,7 +46,7 @@ namespace PunityEngine.Game.Stages
 
 
         // The update function is the logical loop, here all logic goes.
-        public void Update(){
+        public override void Update(){
             // Loop through all of the buttons, and check what button is being pressed,
             // Act acordingly.
             for (int i = 0; i < buttons.Length; i++)
@@ -70,7 +56,7 @@ namespace PunityEngine.Game.Stages
                     switch (buttons[i].ID)
                     {
                         case 0: // Join
-                            buttonPressed = buttonAlternatives.Join;
+                            Console.WriteLine("Join code yay");
                         break;
                         case 1: // Host
                             Host.InitHost();

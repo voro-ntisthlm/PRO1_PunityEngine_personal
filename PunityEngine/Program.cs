@@ -31,22 +31,7 @@ namespace PunityEngine
                 Raylib.ClearBackground(Color.BLANK);
                 
                 // GameHandler is a static class.
-                GameHandler.Draw();
-                GameHandler.Update();
-
-                /*
-                // This will run the update function 20 times a second, instead of every single frame.
-                // NOTE: this solution was mainly taken from the C# refrences.
- 
-                tickTimer -= Raylib.GetFrameTime();
-                if (tickTimer < 0)
-                {
-                    game.Update();
-
-                    // Resets the timer.
-                    tickTimer = tickTimerMaxValue;
-                }
-                */
+                GameHandler.Run();
 
                 Raylib.EndDrawing();
             }

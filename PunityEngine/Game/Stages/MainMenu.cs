@@ -1,12 +1,13 @@
 using System;
 using System.Numerics;
 using Raylib_cs;
-using PunityEngine.Engine.UI;
 using PunityEngine;
+using PunityEngine.Engine.UI;
+using PunityEngine.Engine.Stage;
 
 namespace PunityEngine.Game.Stages
 {
-    public class MainMenu
+    public class MainMenu : Stage, IStage
     {    
         #region UI elements
         
@@ -29,27 +30,8 @@ namespace PunityEngine.Game.Stages
         
         #endregion
 
-
-        public enum buttonAlternatives{
-            Empty,
-            NewGame,
-            Saves,
-            Coop,
-            LvlEditor,
-            Settings
-        }
-
-
-        public buttonAlternatives buttonPressed = buttonAlternatives.Empty;
-
-
-        // The main loop, every drawn element is called here.
-        public void Draw(){
-            DrawUI();
-        }
-
         // Put all UI elements in here.
-        public void DrawUI(){
+        public override void DrawUI(){
             
             // Loop through all buttons, as its an array of buttons,
             // all of 'em has a draw function. 
@@ -66,7 +48,7 @@ namespace PunityEngine.Game.Stages
 
 
         // The update function is the logical loop, here all logic goes.
-        public void Update(){
+        public override void Update(){
             // Loop through all of the buttons, and check what button is being pressed,
             // Act acordingly.
             for (int i = 0; i < buttons.Length; i++)
@@ -76,10 +58,10 @@ namespace PunityEngine.Game.Stages
                     switch (buttons[i].ID)
                     {
                         case 0: // New Game
-                            buttonPressed = buttonAlternatives.NewGame;
+                            GameHandler.CurrentStage = GameHandler.Stages.Game;
                         break;
                         case 2: // Coop
-                            buttonPressed = buttonAlternatives.Coop;
+                            GameHandler.CurrentStage = GameHandler.Stages.CoopMenu;
                         break;
                         case 5: // Exit
                             Raylib.CloseWindow();
