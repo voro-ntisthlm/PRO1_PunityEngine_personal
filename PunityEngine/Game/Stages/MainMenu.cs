@@ -9,6 +9,10 @@ namespace PunityEngine.Game.Stages
 {
     public class MainMenu : Stage, IStage
     {    
+        public MainMenu(string _stageName){
+            stageName = _stageName;
+        }
+        
         #region UI elements
         
         static int topOffset = 20;
@@ -58,10 +62,10 @@ namespace PunityEngine.Game.Stages
                     switch (buttons[i].ID)
                     {
                         case 0: // New Game
-                            GameHandler.CurrentStage = GameHandler.Stages.Game;
+                        
                         break;
                         case 2: // Coop
-                            GameHandler.CurrentStage = GameHandler.Stages.CoopMenu;
+                            StageHnadler.SetCurrentStage("Coop");
                         break;
                         case 5: // Exit
                             Raylib.CloseWindow();

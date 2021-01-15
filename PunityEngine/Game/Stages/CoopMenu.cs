@@ -9,7 +9,11 @@ using PunityEngine.Engine.Stage;
 namespace PunityEngine.Game.Stages
 {
     public class CoopMenu : Stage, IStage
-    {    
+    {
+        public CoopMenu(string _stageName){
+            stageName = _stageName;
+        }
+
         #region UI elements
         
         static int topOffset = 20;

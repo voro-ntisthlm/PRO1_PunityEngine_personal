@@ -8,6 +8,10 @@ namespace PunityEngine.Game.Stages
 {
     public class MainGame : Stage, IStage
     {
+        public MainGame(string _stageName){
+            stageName = _stageName;
+        }
+        
         Player player = new Player();       
 
         public override void DrawGame(){

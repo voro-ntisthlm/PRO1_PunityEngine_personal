@@ -1,6 +1,7 @@
 ﻿using System;
 using Raylib_cs;
 using System.Timers;
+using PunityEngine.Engine.Stage;
 
 namespace PunityEngine
 {
@@ -11,14 +12,12 @@ namespace PunityEngine
 
         #endregion
 
-        // This timer will be used to run the update function at the tick speed.
-        static float tickTimerMaxValue = 0.025f;
-        static float tickTimer = tickTimerMaxValue;
 
         static void Main(string[] args)
         {
-            // Initilizes the screenHandler
+            // Initilizes the handlers that need initializing
             ScreenHandler.Init(CONFIG_SCREEN);
+            GameHandler.Init();
 
             // To allow the esc button to be used as a pause button,
             // F12 have been set as the exit key.
@@ -31,6 +30,7 @@ namespace PunityEngine
                 Raylib.ClearBackground(Color.BLANK);
                 
                 // GameHandler is a static class.
+                StageHnadler.Run();
                 GameHandler.Run();
 
                 Raylib.EndDrawing();
