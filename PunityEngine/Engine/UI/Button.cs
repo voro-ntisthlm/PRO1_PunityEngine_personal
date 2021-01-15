@@ -20,7 +20,7 @@ namespace PunityEngine.Engine.UI
 
         #endregion
 
-        #region Different types of buttons. Can pick wheter or not to use a solid color, use a textured background or only a texture.
+        #region Different types of buttons. Can pick whether or not to use a solid color, use a textured background or only a texture.
 
         // This constructor defines a button with a solid color, and plain text.
         public Button(int _ID, Vector2 _pos, Vector2 _Size, Color _backgroundColor,Color _textColor, float _fontSize, string _text)
@@ -35,7 +35,7 @@ namespace PunityEngine.Engine.UI
             
             ScaleToScreen();
 
-            // Multiply the value by the scalFactor
+            // Multiply the value by the scaleFactor
             position   *= ScaleFactor;
             size       *= ScaleFactor;
 
@@ -57,7 +57,7 @@ namespace PunityEngine.Engine.UI
 
             ScaleToScreen();
     
-            // Multiply the value by the scalFactor
+            // Multiply the value by the scaleFactor
             position *= ScaleFactor;
             size     *= ScaleFactor;
             
@@ -76,7 +76,7 @@ namespace PunityEngine.Engine.UI
 
             ScaleToScreen();
 
-            // Multiply the value by the scalFactor
+            // Multiply the value by the scaleFactor
             position *= ScaleFactor;
             size     *= ScaleFactor;
 
@@ -96,8 +96,8 @@ namespace PunityEngine.Engine.UI
                 }
             }
             else{
-                // if the user has defined a texuture it will not use this.
-                // Depending on the IsHovered, it will change the backgound.
+                // if the user has defined a texture it will not use this.
+                // Depending on the IsHovered, it will change the background.
                 if (IsHovered()){
                     Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, Color.GRAY);
                 }else{

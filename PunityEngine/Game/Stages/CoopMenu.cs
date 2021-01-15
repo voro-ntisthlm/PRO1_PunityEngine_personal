@@ -20,9 +20,10 @@ namespace PunityEngine.Game.Stages
         
         // Here I define all of the menu buttons.
         Button[] buttons = {
-            // Button spacing calc: 1/10 + [previus] + 10(diff) + 40 + topOffset
+            // Button spacing calc: 1/10 + [previous] + 10(diff) + 40 + topOffset
             new Button(0, new Vector2(100, Raylib.GetScreenHeight()/10 +  70 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Join Game"),
             new Button(1, new Vector2(100, Raylib.GetScreenHeight()/10 + 120 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Host"   ),
+            new Button(2, new Vector2(100, Raylib.GetScreenHeight()/10 + 170 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Back"   ),
         };
 
         Label[] labels = {
@@ -52,7 +53,7 @@ namespace PunityEngine.Game.Stages
         // The update function is the logical loop, here all logic goes.
         public override void Update(){
             // Loop through all of the buttons, and check what button is being pressed,
-            // Act acordingly.
+            // Act accordingly.
             for (int i = 0; i < buttons.Length; i++)
             {
                 if (buttons[i].IsClicked())
@@ -64,6 +65,9 @@ namespace PunityEngine.Game.Stages
                         break;
                         case 1: // Host
                             Host.InitHost();
+                        break;
+                        case 2: // Back
+                            StageHandler.SetCurrentStage("MainMenu");
                         break;
                     }   
                 }    

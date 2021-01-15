@@ -22,7 +22,7 @@ namespace PunityEngine
                 string[] configLines = System.IO.File.ReadAllLines(CONFIG_SCREEN);
 
                 // This will loop thorugh the file and depending on the "variable" 
-                // it will assign the value to the corrosponding variable
+                // it will assign the value to the corresponding variable
                 foreach (var config in configLines)
                 {
                     string[] line = config.Split(":");

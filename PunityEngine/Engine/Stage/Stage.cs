@@ -18,7 +18,7 @@ namespace PunityEngine.Engine.Stage
     {
         public string stageName {get; set;}
      
-        // These methods will be overriden by each stage
+        // These methods will be overridden by each stage
         public virtual void Draw(){
             DrawBackground();
             DrawGame();

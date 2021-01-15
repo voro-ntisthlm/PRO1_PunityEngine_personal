@@ -21,9 +21,9 @@ namespace PunityEngine.Engine.Network
         #region Intergration stuff.
         // Creates a new thread and parse Host.cfg to it.
         static public void InitHost(){
-            ReadConfig(); // Reads and assigns the necisarry variables from Config
+            ReadConfig(); // Reads and assigns the necessary variables from Config
 
-            // Create a seprete thread so that the main thread dont get clogged up by a while loop
+            // Create a seprete thread so that the main thread don't get clogged up by a while loop
             Thread hostThread = new Thread(new ThreadStart(TCPServerListener));
             hostThread.Start();
         }
@@ -37,7 +37,7 @@ namespace PunityEngine.Engine.Network
                 string[] configLines = System.IO.File.ReadAllLines("./Data/Network/Host.cfg");
 
                 // This will loop thorugh the file and depending on the "variable" 
-                // it will assign the value to the corrosponding variable
+                // it will assign the value to the corresponding variable
                 foreach (var config in configLines)
                 {
                     string[] line = config.Split(":");

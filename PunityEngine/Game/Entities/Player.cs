@@ -6,7 +6,7 @@ namespace PunityEngine.Game.Entities
 {
     public class Player : Entity
     {
-        // This will be replaced when the networking goese into effect.
+        // This will be replaced when the networking goes into effect.
         bool isMultiplayer = false;
 
         public Player(){

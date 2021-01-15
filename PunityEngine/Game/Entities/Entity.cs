@@ -23,7 +23,7 @@ namespace PunityEngine.Game.Entities
         }
 
         public virtual void Update(){
-            //All entities will have an update function, up to the induvidual entity to imploment it.
+            //All entities will have an update function, up to the individual entity to imploment it.
         }
 
         //This method will get a multiplication factor on how to scale the Size of the entity based on the screens height.

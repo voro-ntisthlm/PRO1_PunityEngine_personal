@@ -15,7 +15,7 @@ namespace PunityEngine
 
         static void Main(string[] args)
         {
-            // Initilizes the handlers that need initializing
+            // Initializes the handlers that need initializing
             ScreenHandler.Init(CONFIG_SCREEN);
             GameHandler.Init();
 
@@ -26,11 +26,11 @@ namespace PunityEngine
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
-                // Default color if it is not overidden by a background in any stage.
+                // Default color if it is not overbidden by a background in any stage.
                 Raylib.ClearBackground(Color.BLANK);
                 
                 // GameHandler is a static class.
-                StageHnadler.Run();
+                StageHandler.Run();
                 GameHandler.Run();
 
                 Raylib.EndDrawing();

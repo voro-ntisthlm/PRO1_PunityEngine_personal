@@ -4,7 +4,7 @@ using Raylib_cs;
 
 namespace PunityEngine.Engine.Stage
 {
-    public static class StageHnadler
+    public static class StageHandler
     {
         // This timer will be used to run the update function at the tick speed.
         static float tickTimerMaxValue = 0.05f;
@@ -19,7 +19,7 @@ namespace PunityEngine.Engine.Stage
         
         public static void Run()
         {
-            // Run the necissary functions from the current stage (TM)
+            // Run the necessary functions from the current stage (TM)
             stages[currentStageID].Draw();
             stages[currentStageID].Update();
 
@@ -40,7 +40,7 @@ namespace PunityEngine.Engine.Stage
         {
             try
             {
-                // Loop throgh the list of stages and get the id of that,
+                // Loop through the list of stages and get the id of that,
                 // then if the stageName of the stage matches the stageName
                 // parsed, assign that i value as the currentStageID.
                 for (Int16 i = 0; i < stages.Count; i++)
@@ -54,7 +54,7 @@ namespace PunityEngine.Engine.Stage
             }
             catch (System.Exception)
             {
-                return true;
+                return false;
             }
         }
 
@@ -66,6 +66,20 @@ namespace PunityEngine.Engine.Stage
             currentStageID = stageID;
             return true;
 
+        }
+
+        public static int GetCurrentStageIDbyName(string stageName){
+            // Repeat some code from the SetCurrentStage().
+            for (int i = 0; i < stages.Count; i++)
+            {
+                if (stages[i].stageName == stageName)
+                {
+                    return i;
+                }
+            }
+
+            // Will default to 0 if it cant find anything.
+            return 0;
         }
 
     }
