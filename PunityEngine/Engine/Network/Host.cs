@@ -3,109 +3,36 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Diagnostics;
 
 namespace PunityEngine.Engine.Network
 {
     static public class Host
     {
-        // TODO: Create a method that will parse host information and start the server listener.
-        //       Create a new thread that will handle the host server stuff. 
-        static public int port = 3404;
-        static public IPAddress hostAdress = IPAddress.Parse("127.0.0.1");
-        static public int playerLimit = 2;
-        static public string hostName = "PunityGame";
-        static public string motd = "A Punity Game";
-
-
-        
-        #region Intergration stuff.
-        // Creates a new thread and parse Host.cfg to it.
         static public void InitHost(){
-            ReadConfig(); // Reads and assigns the necessary variables from Config
-
             // Create a seprete thread so that the main thread don't get clogged up by a while loop
-            Thread hostThread = new Thread(new ThreadStart(TCPServerListener));
+            Thread hostThread = new Thread(new ThreadStart(startServer));
             hostThread.Start();
         }
 
-        // Read Host.cfg
-        static public void ReadConfig(){
-            
-            // Try to assign the Host.cfg values to the server variables
-            try
-            {
-                string[] configLines = System.IO.File.ReadAllLines("./Data/Network/Host.cfg");
+        static void startServer(){
+            // This will start the PunityServer.exe, a dedicated server.
+            // https://github.com/voro-ntisthlm/PunityServer 
+            // Process.Start("./Data/Network/Server/PunityServer.exe");
 
-                // This will loop thorugh the file and depending on the "variable" 
-                // it will assign the value to the corresponding variable
-                foreach (var config in configLines)
-                {
-                    string[] line = config.Split(":");
+            ProcessStartInfo serverInfo = new ProcessStartInfo("./Data/Network/Server/PunityServer.exe");
+            serverInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
-                    switch (line[0])
-                    {
-                        case "PORT":
-                            int.TryParse(line[1], out port);
-                            break;
-                        case "MAXPLAYERS":
-                            int.TryParse(line[1], out playerLimit);
-                            break;
-                        case "IP":
-                            hostAdress = IPAddress.Parse(line[1]);
-                            break;
-                        case "NAME":
-                            hostName = line[1];
-                            break;
-                        case "MOTD":
-                            motd = line[1];
-                            break;
-                        default:
-                        break;
-                    }
-                }
-            }
-            catch (System.Exception)
-            {
-                Console.WriteLine("ERROR WHEN LOADING HOST.CFG");
-                throw; 
-            }
+            Process.Start(serverInfo);
+
+            // NOTE: mainly taken from codegrepper.
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Maximized;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "";
+            process.StartInfo = startInfo;
+            process.Start();
         }
-        #endregion
-
-        #region TCP SERVER
-
-        // structure:
-        /*
-            Client(local), update screen, send data to -> Server
-            Client(remote) <- Data from server.
-            
-            ------------------------
-            |Server data:          |
-            ------------------------
-            |UID                   |
-            |IP                    |
-            |port                  |
-            |position              |
-            ------------------------
-
-            Important note, No anti cheat etc.
-            Serve should get validation code at some point.
-        */
-
-        static private void TCPServerListener(){
-            try
-            {
-                // TCP server
-                Console.WriteLine("Starting Server on:" + hostAdress + ":" + port);
-            }
-            catch (System.Exception)
-            {
-                // log errors
-            }
-        }
-
-        //Error logger
-
-        #endregion
     }
 }

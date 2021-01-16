@@ -13,6 +13,7 @@ namespace PunityEngine
 {
     static class GameHandler
     {
+
         static public void Init(){
             // Add all stages that should be loaded at start time.
             // NOTE: The first added will be the first loaded and drawn.

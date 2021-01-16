@@ -10,7 +10,6 @@ namespace PunityEngine.Engine.Stage
         static float tickTimerMaxValue = 0.05f;
         static float tickTimer = tickTimerMaxValue;
 
-
         // Creates a list of all loaded stages.
         public static List<IStage> stages = new List<IStage>();
         
@@ -104,21 +103,28 @@ namespace PunityEngine.Engine.Stage
             {
                 if (stages[i].stageName == stageName)
                 {
-                    stages.RemoveAt(i);
-                    
-                    // If the user has supplied a fallback stage, it will set
-                    // that stage as the current stage.
-                    if (fallbackStageID != default(int))
-                        currentStageID = fallbackStageID;
+                    try
+                    {
+                        stages.RemoveAt(i);
+                        
+                        // If the user has supplied a fallback stage, it will set
+                        // that stage as the current stage.
+                        if (fallbackStageID != default(int))
+                            currentStageID = fallbackStageID;
 
-                    return true;
+                        return true;
+                    }
+                    catch (System.Exception)
+                    {
+                        return false;
+                    }
                 }
             }
             return false;
         }
 
         // Will remove the currently loaded stage from the list,
-        // 
+        // also sets the current stage id so that it will not display a black screen.
         public static bool UnloadCurrentStage(Int16 fallbackStageID = default(int))
         {
             try
