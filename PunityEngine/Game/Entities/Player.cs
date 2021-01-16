@@ -1,14 +1,12 @@
 using System;
 using System.Numerics;
 using Raylib_cs;
+using PunityEngine.Engine.Network;
 
 namespace PunityEngine.Game.Entities
 {
     public class Player : Entity
     {
-        // This will be replaced when the networking goes into effect.
-        bool isMultiplayer = false;
-
         public Player(){
             texture = Raylib.LoadTexture("Data/icon.png");
             ScaleToScreen(); //Inherited from the Entity class
@@ -20,7 +18,7 @@ namespace PunityEngine.Game.Entities
         }
 
         public override void Update(){
-            if (!isMultiplayer)
+            if (!Client.isMultiplayer)
             {
                 UserInput();
             }
@@ -33,21 +31,13 @@ namespace PunityEngine.Game.Entities
         // TODO: Create a better user input system.
         void UserInput(){
             if (Raylib.IsKeyDown(key: KeyboardKey.KEY_W))
-            {
                 Position.Y -= 200 * Raylib.GetFrameTime();
-            }
             if (Raylib.IsKeyDown(key: KeyboardKey.KEY_S))
-            {
                 Position.Y += 200 * Raylib.GetFrameTime();
-            }
             if (Raylib.IsKeyDown(key: KeyboardKey.KEY_A))
-            {
                 Position.X -= 200 * Raylib.GetFrameTime();
-            }
             if (Raylib.IsKeyDown(key: KeyboardKey.KEY_D))
-            {
                 Position.X += 200 * Raylib.GetFrameTime();
-            }
         }
     }
 }

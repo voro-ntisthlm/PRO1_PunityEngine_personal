@@ -62,10 +62,12 @@ namespace PunityEngine.Game.Stages
                     switch (buttons[i].ID)
                     {
                         case 0: // New Game
-                            StageHandler.SetCurrentStage("Game");
+                            StageHandler.LoadStage(new MainGame("Game"));
                         break;
                         case 2: // Coop
-                            StageHandler.SetCurrentStage("Coop");
+                            if(StageHandler.StageExists("Coop"))
+                                StageHandler.SetCurrentStage("Coop");
+                            else StageHandler.LoadStage(new CoopMenu("Coop"));
                         break;
                         case 5: // Exit
                             Raylib.CloseWindow();

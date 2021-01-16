@@ -68,7 +68,8 @@ namespace PunityEngine.Engine.Stage
 
         }
 
-        public static int GetCurrentStageIDbyName(string stageName){
+        public static int GetCurrentStageIDbyName(string stageName)
+        {
             // Repeat some code from the SetCurrentStage().
             for (int i = 0; i < stages.Count; i++)
             {
@@ -82,5 +83,92 @@ namespace PunityEngine.Engine.Stage
             return 0;
         }
 
+        public static bool StageExists(string stageName)
+        {
+            // Repeat some code from the SetCurrentStage().
+            for (int i = 0; i < stages.Count; i++)
+            {
+                if (stages[i].stageName == stageName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // This will check the stageName of a stage, and remove it from the list of stages.
+        // It also has an optional fallback stage that can be set to change the stage when called.
+        public static bool UnloadStage(string stageName, Int16 fallbackStageID = default(int))
+        {
+            for (int i = 0; i < stages.Count; i++)
+            {
+                if (stages[i].stageName == stageName)
+                {
+                    stages.RemoveAt(i);
+                    
+                    // If the user has supplied a fallback stage, it will set
+                    // that stage as the current stage.
+                    if (fallbackStageID != default(int))
+                        currentStageID = fallbackStageID;
+
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Will remove the currently loaded stage from the list,
+        // 
+        public static bool UnloadCurrentStage(Int16 fallbackStageID = default(int))
+        {
+            try
+            {
+                stages.RemoveAt(currentStageID);
+                
+                // If the user has supplied a fallback stage, it will set
+                // that stage as the current stage.
+                if (fallbackStageID != default(int))
+                    currentStageID = fallbackStageID;
+                else currentStageID = 0;
+                
+                return true;   
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+
+        }
+
+        // Simply makes the syntax StageHandler.stages.add(new IStage); a bit easier by doing StageHandler.AddStage().
+        // preforms a try where it adds the stage to the list.
+        public static bool AddStage(IStage newStage)
+        {
+            try
+            {
+                stages.Add(newStage);
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+        }
+
+        // The LoadStage method works in the same way as AddStage, 
+        // but it also sets it as the current stage.
+        public static bool LoadStage(IStage newStage)
+        {
+            try
+            {
+                stages.Add(newStage);
+                SetCurrentStage(newStage.stageName);
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+        }
     }
 }

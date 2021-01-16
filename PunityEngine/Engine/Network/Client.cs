@@ -2,7 +2,8 @@ using System;
 
 namespace PunityEngine.Engine.Network
 {
-    public class Client
+    public static class Client
     {
+        public static bool isMultiplayer = false;
     }
 }

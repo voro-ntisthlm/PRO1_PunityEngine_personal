@@ -16,9 +16,8 @@ namespace PunityEngine
         static public void Init(){
             // Add all stages that should be loaded at start time.
             // NOTE: The first added will be the first loaded and drawn.
-            StageHandler.stages.Add(new MainMenu("MainMenu"));
-            StageHandler.stages.Add(new CoopMenu("Coop"    ));
-            StageHandler.stages.Add(new MainGame("Game"    ));
+            StageHandler.AddStage(new MainMenu("MainMenu"));
+            StageHandler.AddStage(new CoopMenu("Coop"    ));
         }
 
         static public void Run(){
@@ -26,7 +25,7 @@ namespace PunityEngine
             // This will act as the pause menu, when not in the main menu.
             if (Raylib.IsKeyPressed(key: KeyboardKey.KEY_ESCAPE) && StageHandler.currentStageID != 0)
             {
-                StageHandler.SetCurrentStage("MainMenu");
+                StageHandler.UnloadCurrentStage();
             }
         }
     }
