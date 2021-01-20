@@ -4,7 +4,7 @@ using Raylib_cs;
 
 namespace PunityEngine.Engine.UI
 {
-    public class Label : UI
+    public class Label : UI, IUI
     {
         public string text {get; set;}
         public Vector2 position {get; set;}

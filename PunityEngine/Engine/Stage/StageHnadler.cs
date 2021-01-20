@@ -13,6 +13,7 @@ namespace PunityEngine.Engine.Stage
         // Creates a list of all loaded stages.
         public static List<IStage> stages = new List<IStage>();
         
+
         // This will be used when changing stages.
         public static Int16 currentStageID = 0;
         
@@ -35,6 +36,10 @@ namespace PunityEngine.Engine.Stage
         // Current stage switchers
         // Will return a bool as a check, so that code can make sure that
         // the stage switch was successfull.
+        /// <summary>
+        /// Use the name of a stage to set it as the currentStageID.
+        /// Returns true if successfull, false if not.
+        ///</summary>
         public static bool SetCurrentStage(string stageName)
         {
             try
@@ -57,9 +62,11 @@ namespace PunityEngine.Engine.Stage
             }
         }
 
-        // If you are sure of the id, then simply use that instead of the name.
-        // This simply assigns the currentStageID to the desired stageID,
-        // same result as doing "StageHandler.currentStageID = ..."
+        /// <summary>
+        /// If you are sure of the id, then simply use that instead of the name.
+        /// This simply assigns the currentStageID to the desired ID,
+        /// same result as doing "StageHandler.currentStageID = [int]"
+        ///</summary>
         public static bool SetCurrentStage(Int16 stageID)
         {
             currentStageID = stageID;
@@ -67,6 +74,7 @@ namespace PunityEngine.Engine.Stage
 
         }
 
+        /// <summary>Returns the ID of the stage by using the parsed stageName paramater.</summary>
         public static int GetCurrentStageIDbyName(string stageName)
         {
             // Repeat some code from the SetCurrentStage().
@@ -82,6 +90,7 @@ namespace PunityEngine.Engine.Stage
             return 0;
         }
 
+        /// <summary>This will return true if the stage name parsed exists within the stage list, otherwise it will return false.</summary>
         public static bool StageExists(string stageName)
         {
             // Repeat some code from the SetCurrentStage().
@@ -95,8 +104,9 @@ namespace PunityEngine.Engine.Stage
             return false;
         }
 
-        // This will check the stageName of a stage, and remove it from the list of stages.
-        // It also has an optional fallback stage that can be set to change the stage when called.
+
+        /// <summary>This will check the stageName of a stage, and remove it from the list of stages.</summary>
+        /// <param name="fallbackStageID">An optional fallback stage that can be set to change the stage when called.</param>
         public static bool UnloadStage(string stageName, Int16 fallbackStageID = default(int))
         {
             for (int i = 0; i < stages.Count; i++)
@@ -123,8 +133,8 @@ namespace PunityEngine.Engine.Stage
             return false;
         }
 
-        // Will remove the currently loaded stage from the list,
-        // also sets the current stage id so that it will not display a black screen.
+        /// <summary>Will remove the currently loaded stage from the list, also sets the current stage id so that it will not display a black screen.</summary>
+        /// <param name="fallbackStageID">An optional stage id, default set to 0, ie the first thing in the stage list.</param>
         public static bool UnloadCurrentStage(Int16 fallbackStageID = default(int))
         {
             try
@@ -146,8 +156,9 @@ namespace PunityEngine.Engine.Stage
 
         }
 
-        // Simply makes the syntax StageHandler.stages.add(new IStage); a bit easier by doing StageHandler.AddStage().
-        // preforms a try where it adds the stage to the list.
+        /// <summary>Simply makes the syntax StageHandler.stages.add(new IStage); a bit easier by doing StageHandler.AddStage(). 
+        /// Preforms a try where it adds the stage to the list.</summary>
+        /// <param name="newStage">The stage that should be added.</param>
         public static bool AddStage(IStage newStage)
         {
             try
@@ -161,8 +172,8 @@ namespace PunityEngine.Engine.Stage
             }
         }
 
-        // The LoadStage method works in the same way as AddStage, 
-        // but it also sets it as the current stage.
+        /// <summary>The LoadStage method works in the same way as AddStage, but it also sets it as the current stage.</summary>
+        /// <param name="newStage">The stage that should be added.</param>
         public static bool LoadStage(IStage newStage)
         {
             try

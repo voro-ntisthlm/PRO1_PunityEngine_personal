@@ -19,16 +19,15 @@ namespace PunityEngine.Game.Stages
         static int topOffset = 20;
         
         // Here I define all of the menu buttons.
-        Button[] buttons = {
+        IUI[] uiElements = {
             // Button spacing calc: 1/10 + [previous] + 10(diff) + 40 + topOffset
             new Button(0, new Vector2(100, Raylib.GetScreenHeight()/10 +  70 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Join Game"),
-            new Button(1, new Vector2(100, Raylib.GetScreenHeight()/10 + 120 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Host"   ),
-            new Button(2, new Vector2(100, Raylib.GetScreenHeight()/10 + 170 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Back"   ),
-        };
-
-        Label[] labels = {
+            // new Button(3, new Vector2(100, Raylib.GetScreenHeight()/10 + 120 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Broadcast"),
+            // new Button(1, new Vector2(100, Raylib.GetScreenHeight()/10 + 170 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Host"   ),
+            new Button(2, new Vector2(100, Raylib.GetScreenHeight()/10 + 220 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Back"   ),
+            
             new Label("Co-op", new Vector2(100, Raylib.GetScreenHeight()/10), 60, Color.WHITE)
-        };  
+        };
         
         #endregion
 
@@ -38,36 +37,34 @@ namespace PunityEngine.Game.Stages
             
             // Loop through all buttons, as its an array of buttons,
             // all of 'em has a draw function. 
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < uiElements.Length; i++)
             {
-                buttons[i].Draw();
-            }
-
-            for (int i = 0; i < labels.Length; i++)
-            {
-                labels[i].Draw();
+                uiElements[i].Draw();
             }
         }
 
 
         // The update function is the logical loop, here all logic goes.
         public override void Update(){
-            // Loop through all of the buttons, and check what button is being pressed,
+            // Loop through all of the uiElements, and check what button is being pressed,
             // Act accordingly.
-            for (int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < uiElements.Length; i++)
             {
-                if (buttons[i].IsClicked())
+                if (uiElements[i].IsClicked())
                 {
-                    switch (buttons[i].ID)
+                    switch (uiElements[i].ID)
                     {
                         case 0: // Join
-                            Console.WriteLine("Join code yay");
+                            Client.Connect();
                         break;
                         case 1: // Host
                             Host.InitHost();
                         break;
                         case 2: // Back
                             StageHandler.SetCurrentStage("MainMenu");
+                        break;
+                        case 3:
+                            Client.Broadcast();
                         break;
                     }   
                 }    

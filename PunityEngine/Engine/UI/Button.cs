@@ -4,10 +4,9 @@ using System.Numerics;
 
 namespace PunityEngine.Engine.UI
 {
-    public class Button : UI
+    public class Button : UI, IUI
     {
         #region Variables
-        public int ID = 0;
         public Vector2 position = new Vector2(0,0);
         public Vector2 size = new Vector2(0,0);
         public Rectangle btnBounds = new Rectangle();
@@ -125,12 +124,12 @@ namespace PunityEngine.Engine.UI
 
         #region Logic
         // This will check if the mouse is within the bounds of the button.
-        public bool IsHovered(){
+        public override bool IsHovered(){
             return (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), btnBounds));
         }
 
         // Using the IsHovered function, it will check the return value of it and also if the left mouse button is pressed.
-        public bool IsClicked(){
+        public override bool IsClicked(){
             return (IsHovered() && Raylib.IsMouseButtonReleased(MouseButton.MOUSE_LEFT_BUTTON));
         }
         #endregion

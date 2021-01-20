@@ -25,14 +25,7 @@ namespace PunityEngine.Engine.Network
 
             Process.Start(serverInfo);
 
-            // NOTE: mainly taken from codegrepper.
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Maximized;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "";
-            process.StartInfo = startInfo;
-            process.Start();
+            
         }
     }
 }
