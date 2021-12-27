@@ -22,8 +22,8 @@ namespace PunityEngine.Game.Stages
         IUI[] uiElements = {
             // Button spacing calc: 1/10 + [previous] + 10(diff) + 40 + topOffset
             new Button(0, new Vector2(100, Raylib.GetScreenHeight()/10 +  70 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Join Game"),
-            // new Button(3, new Vector2(100, Raylib.GetScreenHeight()/10 + 120 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Broadcast"),
-            // new Button(1, new Vector2(100, Raylib.GetScreenHeight()/10 + 170 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Host"   ),
+            new Button(3, new Vector2(100, Raylib.GetScreenHeight()/10 + 120 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Broadcast"),
+            new Button(1, new Vector2(100, Raylib.GetScreenHeight()/10 + 170 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Host"   ),
             new Button(2, new Vector2(100, Raylib.GetScreenHeight()/10 + 220 + topOffset), new Vector2(250, 40), Color.WHITE, Color.BLACK, 30, "Back"   ),
             
             new Label("Co-op", new Vector2(100, Raylib.GetScreenHeight()/10), 60, Color.WHITE)
